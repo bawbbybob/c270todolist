@@ -1,5 +1,5 @@
 import unittest
-from calculator import Calculator # This is the logic class you created
+from calculator import Calculator
 
 class TestCalculator(unittest.TestCase):
     def setUp(self):
