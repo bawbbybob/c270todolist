@@ -11,7 +11,7 @@ class TestCalculator(unittest.TestCase):
 
     def test_division_by_zero(self):
         # Test case: handling division by zero
-        self.assertEqual(self.calc.divide(10, 0), "Error: Division by Zero")
+        self.assertEqual(self.calc.divide(10, 0), "Error: Division by zero is not allowed.")
 
 if __name__ == '__main__':
     unittest.main()
