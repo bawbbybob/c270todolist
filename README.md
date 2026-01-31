@@ -6,9 +6,10 @@ A Flask-based Calculator application with CI/CD pipeline, Docker containerizatio
 
 - Flask web application with calculator functionality
 - Automated testing with pytest
+- Code quality checks with pylint
 - CI/CD pipeline using GitHub Actions
-- Docker containerization
-- Docker Swarm orchestration definition
+- Docker containerization with smoke tests
+- Docker Swarm orchestration for scaling and high availability
 - Deployed to Render for production hosting
 
 ## 📋 Prerequisites
@@ -31,7 +32,12 @@ A Flask-based Calculator application with CI/CD pipeline, Docker containerizatio
 
 3. **Run tests:**
    ```bash
-   pytest
+   pytest -v
+   ```
+
+4. **Run linting:**
+   ```bash
+   pylint calculator.py app.py
    ```
 
 ## 🐳 Docker Deployment
@@ -55,37 +61,66 @@ The [docker-compose.yml](docker-compose.yml) file defines orchestration settings
 ### Manual Swarm Commands (for presentation)
 
 ```bash
-# Initialize Swarm
+# Step 1: Initialize Swarm
 docker swarm init
 
-# Deploy stack
+# Step 2: Deploy stack (starts 3 replicas)
 docker stack deploy -c docker-compose.yml todolist-stack
 
-# View services
+# Step 3: View services and replicas
 docker service ls
 docker service ps todolist-stack_todolist-app
 
-# Scale service
+# Step 4: Scale UP to 5 replicas (horizontal scaling)
 docker service scale todolist-stack_todolist-app=5
 
-# Remove stack
+# Step 5: View updated replicas
+docker service ps todolist-stack_todolist-app
+
+# Step 6: Scale DOWN to 2 replicas
+docker service scale todolist-stack_todolist-app=2
+
+# Step 7: View service logs
+docker service logs todolist-stack_todolist-app
+
+# Cleanup: Remove stack
 docker stack rm todolist-stack
 
-# Leave swarm
+# Cleanup: Leave swarm
 docker swarm leave --force
 ```
 
 ## 🔁 CI/CD Pipeline
 
-GitHub Actions workflow includes:
+GitHub Actions workflow ([.github/workflows/ci.yml](.github/workflows/ci.yml)) includes:
 
-1. **Test Job** - installs Python 3.10, installs deps, runs pytest
-2. **Docker Build & Test** - builds image and verifies container runs
-3. **Deploy** - triggers Render deploy hook on push to main
+### Pipeline Jobs:
 
-### GitHub Secrets Required
+1. **Test & Lint Job:**
+   - Checks out code from GitHub
+   - Sets up Python 3.10 environment
+   - Installs dependencies from requirements.txt
+   - **Lints code with pylint** (code quality gate)
+   - **Runs unit tests with pytest** (functional verification)
 
-- `RENDER_DEPLOY_HOOK` (Render deploy hook URL)
+2. **Docker Build & Test Job:**
+   - Builds Docker image from Dockerfile
+   - Starts container on port 8080
+   - **Performs smoke test** (curl health check)
+   - Validates container logs
+   - Cleans up test container
+
+### Pipeline Triggers:
+- **Push to main branch** - runs all jobs
+- **Pull requests to main** - runs all jobs
+
+### Quality Gates:
+- ✅ Pylint must pass (code quality standards)
+- ✅ All unit tests must pass
+- ✅ Docker image must build successfully
+- ✅ Container must start and respond to HTTP requests
+
+This ensures **only tested, linted, and containerized code** reaches production.
 
 ## 📁 Project Structure
 

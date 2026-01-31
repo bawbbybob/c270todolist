@@ -33,7 +33,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          python -m unittest test_calculator.py -v
+          pytest -v
 
   docker-build-test:
     runs-on: ubuntu-latest
