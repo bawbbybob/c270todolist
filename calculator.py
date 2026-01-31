@@ -3,45 +3,21 @@
 
 class Calculator:
     """Basic arithmetic operations."""
-    def add(self, a, b):
+
+    def add(self, left, right):
         """Adds two numbers."""
-        return a + b
+        return left + right
 
-    def subtract(self, a, b):
+    def subtract(self, left, right):
         """Subtracts the second number from the first."""
-        return a - b
-    
-    def multiply(self, a, b):
+        return left - right
+
+    def multiply(self, left, right):
         """Multiplies both numbers."""
-        return a * b
+        return left * right
 
-    def divide(self, a, b):
+    def divide(self, left, right):
         """Divides the first number by the second. Returns error if dividing by 0."""
-        if b == 0:
+        if right == 0:
             return "Error: Division by Zero"
-        return a / b
-
-
-# Example usage
-if __name__ == "__main__":
-    calc = Calculator()
-    
-    # Addition
-    result_add = calc.add(10, 5)
-    print(f"10 + 5 = {result_add}")
-    
-    # Subtraction
-    result_sub = calc.subtract(10, 5)
-    print(f"10 - 5 = {result_sub}")
-
-    # Multiplication
-    result_mul = calc.multiply(10, 5)
-    print(f"10 * 5 = {result_mul}")
-    
-    # Division
-    result_div = calc.divide(10, 5)
-    print(f"10 / 5 = {result_div}")
-    
-    # Division by zero
-    result_div_zero = calc.divide(10, 0)
-    print(f"10 / 0 = {result_div_zero}")
+        return left / right
