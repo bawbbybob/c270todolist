@@ -35,21 +35,21 @@ class Calculator:
 calc = Calculator()
 
 # Addition
-result_add = calc.add(10, 5)
-print(f"10 + 5 = {result_add}")
+RESULT_ADD = calc.add(10, 5)
+print(f"10 + 5 = {RESULT_ADD}")
 
 # Subtraction
-result_sub = calc.subtract(10, 5)
-print(f"10 - 5 = {result_sub}")
+RESULT_SUB = calc.subtract(10, 5)
+print(f"10 - 5 = {RESULT_SUB}")
 
 # Multiplication
-result_mul = calc.multiply(10, 5)
-print(f"10 * 5 = {result_mul}")
+RESULT_MUL = calc.multiply(10, 5)
+print(f"10 * 5 = {RESULT_MUL}")
 
 # Division
-result_div = calc.divide(10, 5)
-print(f"10 / 5 = {result_div}")
+RESULT_DIV = calc.divide(10, 5)
+print(f"10 / 5 = {RESULT_DIV}")
 
 # Division by zero
-result_div_zero = calc.divide(10, 0)
-print(f"10 / 0 = {result_div_zero}")
+RESULT_DIV_ZERO = calc.divide(10, 0)
+print(f"10 / 0 = {RESULT_DIV_ZERO}")
