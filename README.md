@@ -47,7 +47,7 @@ docker build -t c270todolist:latest .
 docker run -p 8080:8080 c270todolist:latest
 ```
 
-Visit https://yesdaddycalculator.onrender.com/ (production) or http://localhost:8080 (local)
+Visit https://c270todolist.onrender.com/ (production) or http://localhost:8080 (local)
 
 ## 🔄 Docker Swarm Orchestration
 

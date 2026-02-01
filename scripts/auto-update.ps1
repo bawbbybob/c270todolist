@@ -11,7 +11,7 @@ Set-Location $RepoPath
 
 git fetch --quiet
 $localHead = git rev-parse HEAD
-$remoteHead = git rev-parse @{u}
+$remoteHead = git rev-parse "origin/main"
 
 if ($localHead -ne $remoteHead) {
     git pull --ff-only
