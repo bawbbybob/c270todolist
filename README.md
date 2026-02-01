@@ -43,8 +43,8 @@ A Flask-based Calculator application with CI/CD pipeline, Docker containerizatio
 ## 🐳 Docker Deployment
 
 ```bash
-docker build -t c270todolist:latest .
-docker run -p 8080:8080 c270todolist:latest
+docker build -t c270calcapp:latest .
+docker run -p 8080:8080 c270calcapp:latest
 ```
 
 Visit https://c270todolist.onrender.com/ (production) or http://localhost:8080 (local)
@@ -65,26 +65,26 @@ The [docker-compose.yml](docker-compose.yml) file defines orchestration settings
 docker swarm init
 
 # Step 2: Build the image
-docker build -t c270todolist:latest .
+docker build -t c270calcapp:latest .
 
 # Step 3: Deploy stack (starts 3 replicas)
 docker stack deploy -c docker-compose.yml yesdaddy-calc-stack
 
 # Step 4: View services and replicas
 docker service ls
-docker service ps yesdaddy-calc-stack_todolist-app
+docker service ps yesdaddy-calc-stack_calculator-app
 
 # Step 5: Scale UP to 5 replicas (horizontal scaling)
-docker service scale yesdaddy-calc-stack_todolist-app=5
+docker service scale yesdaddy-calc-stack_calculator-app=5
 
 # Step 5: View updated replicas
-docker service ps yesdaddy-calc-stack_todolist-app
+docker service ps yesdaddy-calc-stack_calculator-app
 
 # Step 6: Scale DOWN to 2 replicas
-docker service scale yesdaddy-calc-stack_todolist-app=2
+docker service scale yesdaddy-calc-stack_calculator-app=2
 
 # Step 7: View service logs
-docker service logs yesdaddy-calc-stack_todolist-app
+docker service logs yesdaddy-calc-stack_calculator-app
 
 # Cleanup: Remove stack
 docker stack rm yesdaddy-calc-stack 
